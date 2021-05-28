@@ -7,4 +7,8 @@ Arquivos postman_environment.json contem variaveis de ambiente
 Schema validation 
 Call multiples Url in test 
 Criação de massas de testes e exclusão após utilização da massa 
+validações de performance de acordo com ambiente 
+Validação de valores em campos 
+validação de status code 
+
 
