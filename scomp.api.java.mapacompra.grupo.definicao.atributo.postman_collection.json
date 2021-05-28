@@ -1,9 +1,9 @@
 {
 	"info": {
 		"_postman_id": "b7d00795-9297-4338-a141-b08e589d34a7",
-		"name": "scomp.api.java.mapacompra.grupo.definicao.atributo",
-		"description": "Exposicao de dados de sortimento",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"name": "NomeDoServiço",
+		"description": "ServiçoExemplo",
+		"schema": "Documention"
 	},
 	"item": [
 		{
