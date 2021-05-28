@@ -1,0 +1,1029 @@
+{
+	"info": {
+		"_postman_id": "b7d00795-9297-4338-a141-b08e589d34a7",
+		"name": "scomp.api.java.mapacompra.grupo.definicao.atributo",
+		"description": "Exposicao de dados de sortimento",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "grupos",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "Sucesso - Consultar todos os grupos.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response retornando com sucesso e no formato esperado \", function () {\r",
+											"    // Validação do Reponse code = 200 , que o retorno é um Json , que nao há mensagens de erro e existe um body. \r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.response.to.have.jsonBody();\r",
+											"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+											"    pm.response.to.be.withBody;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Performance da API conforme esperado\", function () {\r",
+											"     pm.expect(pm.response.responseTime).to.be.below(parseInt((pm.environment.get(\"time_out\"))));\r",
+											"});\r",
+											"\r",
+											"const  schema ={\r",
+											"    \"type\":\"object\",\r",
+											"    \"properties\":{\r",
+											"         \"numero_pagina\":            { \"type\": [\"integer\",\"null\"]},\r",
+											"         \"tamanho_pagina\":           { \"type\": [\"integer\",\"null\"]},\r",
+											"         \"total_paginas\":            { \"type\": [\"integer\",\"null\"]},\r",
+											"         \"total_grupos\":             { \"type\": [\"integer\",\"null\"]},\r",
+											"    \"grupos\":{\r",
+											"        \"type\": \"array\",\r",
+											"            \"items\":{\r",
+											"             \"properties\": {\r",
+											"              \"id\":               { \"type\": [\"string\",\"null\"]},\r",
+											"              \"nome\":             { \"type\": [\"string\",\"null\"]},\r",
+											"              \"dcos\": {\r",
+											"              \"type\": \"array\",\r",
+											"                   \"items\":{\r",
+											"                    \"properties\": {\r",
+											"                    \"valor\":           { \"type\": [\"string\",\"null\"]}\r",
+											"                            }\r",
+											"                \r",
+											"                         }\r",
+											"                     },\r",
+											"               \"atributos\": {\r",
+											"               \"type\": \"array\",\r",
+											"                   \"items\":{\r",
+											"                    \"properties\": {\r",
+											"                    \"valor\":           { \"type\": [\"string\",\"null\"]}\r",
+											"                            }\r",
+											"                \r",
+											"                         }\r",
+											"                     }\r",
+											"                  }\r",
+											"            }\r",
+											"       }   \r",
+											"    } \r",
+											"};\r",
+											"\r",
+											"pm.test(\"Validar Schema dos campos de acordo com documentação\",()=> {\r",
+											"    pm.response.to.have.jsonSchema(schema)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Ambiente}}{{baseUrl}}/grupos",
+									"host": [
+										"{{Ambiente}}{{baseUrl}}"
+									],
+									"path": [
+										"grupos"
+									],
+									"query": [
+										{
+											"key": "tamanho",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "pagina",
+											"value": "2",
+											"disabled": true
+										},
+										{
+											"key": "direcao",
+											"value": "DESC",
+											"disabled": true
+										},
+										{
+											"key": "propriedade",
+											"value": "atributos",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Erro - 404 not found- Consultar todos os grupos.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response retornando com sucesso e no formato esperado \", function () {\r",
+											"    // Validação do Reponse code = 200 , que o retorno é um Json , que nao há mensagens de erro e existe um body. \r",
+											"    pm.response.to.have.status(404);\r",
+											"    pm.response.to.have.jsonBody();\r",
+											"    pm.response.to.be.withBody;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Performance da API conforme esperado\", function () {\r",
+											"     pm.expect(pm.response.responseTime).to.be.below(parseInt((pm.environment.get(\"time_out\"))));\r",
+											"});\r",
+											"\r",
+											"\r",
+											"const  schema ={\r",
+											"     \r",
+											"    \"type\": \"object\",\r",
+											"    \"properties\": {\r",
+											"         \"timestamp\":          { \"type\": [\"string\",\"null\"]},\r",
+											"         \"status\":             { \"type\": [\"integer\",\"null\"]},\r",
+											"         \"error\":              { \"type\": [\"string\",\"null\"]},        \r",
+											"         \"message\":            { \"type\": [\"string\",\"null\"]},\r",
+											"         \"path\":               { \"type\": [\"string\",\"null\"]},                \r",
+											"                  }    \r",
+											"};\r",
+											"\r",
+											"pm.test(\"Validar Schema dos campos de acordo com documentação\",()=> {\r",
+											"    pm.response.to.have.jsonSchema(schema)\r",
+											"})\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Ambiente}}{{baseUrl}}/grupo",
+									"host": [
+										"{{Ambiente}}{{baseUrl}}"
+									],
+									"path": [
+										"grupo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST",
+					"item": [
+						{
+							"name": "Sucesso - Criar um novo grupo.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response retornando com sucesso e no formato esperado \", function () {\r",
+											"    // Validação do Reponse code = 200 , que o retorno é um Json , que nao há mensagens de erro e existe um body. \r",
+											"    pm.response.to.have.status(200);\r",
+											"    pm.response.to.have.jsonBody();\r",
+											"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+											"    pm.response.to.be.withBody;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Performance da API conforme esperado\", function () {\r",
+											"     pm.expect(pm.response.responseTime).to.be.below(parseInt((pm.environment.get(\"time_out\"))));\r",
+											"});\r",
+											"\r",
+											"const  schema ={\r",
+											"\r",
+											"        \"type\": \"object\",\r",
+											"             \"properties\": {\r",
+											"              \"id\":               { \"type\": [\"string\",\"null\"]},\r",
+											"              \"nome\":             { \"type\": [\"string\",\"null\"]},\r",
+											"              \"dcos\": {\r",
+											"              \"type\": \"array\",\r",
+											"                   \"items\":{\r",
+											"                    \"properties\": {\r",
+											"                    \"valor\":           { \"type\": [\"string\",\"null\"]}\r",
+											"                            }\r",
+											"                \r",
+											"                         }\r",
+											"                     },\r",
+											"               \"atributos\": {\r",
+											"               \"type\": \"array\",\r",
+											"                   \"items\":{\r",
+											"                    \"properties\": {\r",
+											"                    \"valor\":           { \"type\": [\"string\",\"null\"]}\r",
+											"                            }\r",
+											"                         }\r",
+											"                     }\r",
+											"                  } \r",
+											"};\r",
+											"\r",
+											"pm.test(\"Validar Schema dos campos de acordo com documentação\",()=> {\r",
+											"    pm.response.to.have.jsonSchema(schema)\r",
+											"});\r",
+											"\r",
+											"const responseJson=pm.response.json();\r",
+											"\r",
+											"//Validar consulta e excluir massa criada \r",
+											"pm.sendRequest({\r",
+											"    url: pm.environment.get(\"Ambiente\") + pm.collectionVariables.get(\"baseUrl\") + \"/grupos/\" + responseJson.id,\r",
+											"    method: \"DELETE\",\r",
+											"    header: {\r",
+											"        \"content-type\": \"application/json\",\r",
+											"        \"accept\": \"application/json\"\r",
+											"    },\r",
+											"    body: {}\r",
+											"}, function (err, res) {\r",
+											"     pm.test(\"Massa deletada com sucesso\",function(){\r",
+											"     pm.expect(res.status).to.be.equal(\"OK\");\r",
+											"     })\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Massa de teste\",\r\n  \"dcos\": [\r\n    {\r\n      \"valor\": \"300\"\r\n    },\r\n    {\r\n      \"valor\": \"400\"\r\n    },\r\n    {\r\n      \"valor\": \"500\"\r\n    }\r\n  ],\r\n  \"atributos\": [\r\n    {\r\n      \"valor\": \"COR\"\r\n    },\r\n    {\r\n      \"valor\": \"TESTE\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Ambiente}}{{baseUrl}}/grupos",
+									"host": [
+										"{{Ambiente}}{{baseUrl}}"
+									],
+									"path": [
+										"grupos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Erro - Criar um novo grupo sem nome.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response retornando com sucesso e no formato esperado \", function () {\r",
+											"    // Validação do Reponse code = 200 , que o retorno é um Json , que nao há mensagens de erro e existe um body. \r",
+											"    pm.response.to.have.status(400);\r",
+											"    pm.response.to.have.jsonBody();\r",
+											"    pm.response.to.be.withBody;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Performance da API conforme esperado\", function () {\r",
+											"     pm.expect(pm.response.responseTime).to.be.below(parseInt((pm.environment.get(\"time_out\"))));\r",
+											"});\r",
+											"\r",
+											"const  schema ={\r",
+											"     \r",
+											"    \"type\": \"object\",\r",
+											"    \"properties\": {\r",
+											"         \"timestamp\":          { \"type\": [\"string\",\"null\"]},\r",
+											"         \"status\":             { \"type\": [\"integer\",\"null\"]},\r",
+											"         \"error\":              { \"type\": [\"string\",\"null\"]},        \r",
+											"         \"message\":            { \"type\": [\"string\",\"null\"]},\r",
+											"         \"path\":               { \"type\": [\"string\",\"null\"]},                \r",
+											"                  }    \r",
+											"};\r",
+											"\r",
+											"pm.test(\"Validar Schema dos campos de acordo com documentação\",()=> {\r",
+											"    pm.response.to.have.jsonSchema(schema)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"dcos\": [\r\n    {\r\n      \"valor\": \"100\"\r\n    }\r\n  ],\r\n  \"atributos\": [\r\n    {\r\n      \"valor\": \"COR\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Ambiente}}{{baseUrl}}/grupos",
+									"host": [
+										"{{Ambiente}}{{baseUrl}}"
+									],
+									"path": [
+										"grupos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Erro - Criar um novo grupo sem DCOs.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response retornando com sucesso e no formato esperado \", function () {\r",
+											"    // Validação do Reponse code = 200 , que o retorno é um Json , que nao há mensagens de erro e existe um body. \r",
+											"    pm.response.to.have.status(400);\r",
+											"    pm.response.to.have.jsonBody();\r",
+											"    pm.response.to.be.withBody;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Performance da API conforme esperado\", function () {\r",
+											"     pm.expect(pm.response.responseTime).to.be.below(parseInt((pm.environment.get(\"time_out\"))));\r",
+											"});\r",
+											"\r",
+											"const  schema ={\r",
+											"     \r",
+											"    \"type\": \"object\",\r",
+											"    \"properties\": {\r",
+											"         \"timestamp\":          { \"type\": [\"string\",\"null\"]},\r",
+											"         \"status\":             { \"type\": [\"integer\",\"null\"]},\r",
+											"         \"error\":              { \"type\": [\"string\",\"null\"]},        \r",
+											"         \"message\":            { \"type\": [\"string\",\"null\"]},\r",
+											"         \"path\":               { \"type\": [\"string\",\"null\"]},                \r",
+											"                  }    \r",
+											"};\r",
+											"\r",
+											"pm.test(\"Validar Schema dos campos de acordo com documentação\",()=> {\r",
+											"    pm.response.to.have.jsonSchema(schema)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"TESTEEEEE\",\r\n  \"dcos\": [],\r\n  \"atributos\": [\r\n    {\r\n      \"valor\": \"COR\"\r\n    }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Ambiente}}{{baseUrl}}/grupos",
+									"host": [
+										"{{Ambiente}}{{baseUrl}}"
+									],
+									"path": [
+										"grupos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Erro - Criar um novo grupo sem atributos.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response retornando com sucesso e no formato esperado \", function () {\r",
+											"    // Validação do Reponse code = 200 , que o retorno é um Json , que nao há mensagens de erro e existe um body. \r",
+											"    pm.response.to.have.status(400);\r",
+											"    pm.response.to.have.jsonBody();\r",
+											"    pm.response.to.be.withBody;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Performance da API conforme esperado\", function () {\r",
+											"     pm.expect(pm.response.responseTime).to.be.below(parseInt((pm.environment.get(\"time_out\"))));\r",
+											"});\r",
+											"\r",
+											"const  schema ={\r",
+											"     \r",
+											"    \"type\": \"object\",\r",
+											"    \"properties\": {\r",
+											"         \"timestamp\":          { \"type\": [\"string\",\"null\"]},\r",
+											"         \"status\":             { \"type\": [\"integer\",\"null\"]},\r",
+											"         \"error\":              { \"type\": [\"string\",\"null\"]},        \r",
+											"         \"message\":            { \"type\": [\"string\",\"null\"]},\r",
+											"         \"path\":               { \"type\": [\"string\",\"null\"]},                \r",
+											"                  }    \r",
+											"};\r",
+											"\r",
+											"pm.test(\"Validar Schema dos campos de acordo com documentação\",()=> {\r",
+											"    pm.response.to.have.jsonSchema(schema)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"TESTEEEEE\",\r\n  \"dcos\": [\r\n    {\r\n      \"valor\": \"100\"\r\n    }\r\n  ],\r\n  \"atributos\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Ambiente}}{{baseUrl}}/grupos",
+									"host": [
+										"{{Ambiente}}{{baseUrl}}"
+									],
+									"path": [
+										"grupos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Erro - 404 NOT FOUND",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response retornando com sucesso e no formato esperado \", function () {\r",
+											"    // Validação do Reponse code = 200 , que o retorno é um Json , que nao há mensagens de erro e existe um body. \r",
+											"    pm.response.to.have.status(404);\r",
+											"    pm.response.to.have.jsonBody();\r",
+											"    pm.response.to.be.withBody;\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Performance da API conforme esperado\", function () {\r",
+											"     pm.expect(pm.response.responseTime).to.be.below(parseInt((pm.environment.get(\"time_out\"))));\r",
+											"});\r",
+											"\r",
+											"const  schema ={\r",
+											"     \r",
+											"    \"type\": \"object\",\r",
+											"    \"properties\": {\r",
+											"         \"timestamp\":          { \"type\": [\"string\",\"null\"]},\r",
+											"         \"status\":             { \"type\": [\"integer\",\"null\"]},\r",
+											"         \"error\":              { \"type\": [\"string\",\"null\"]},        \r",
+											"         \"message\":            { \"type\": [\"string\",\"null\"]},\r",
+											"         \"path\":               { \"type\": [\"string\",\"null\"]},                \r",
+											"                  }    \r",
+											"};\r",
+											"\r",
+											"pm.test(\"Validar Schema dos campos de acordo com documentação\",()=> {\r",
+											"    pm.response.to.have.jsonSchema(schema)\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"TESTEEEEE\",\r\n  \"dcos\": [\r\n    {\r\n      \"valor\": \"100\"\r\n    }\r\n  ],\r\n  \"atributos\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{Ambiente}}{{baseUrl}}/grupo",
+									"host": [
+										"{{Ambiente}}{{baseUrl}}"
+									],
+									"path": [
+										"grupo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "grupos/{id}",
+			"item": [
+				{
+					"name": "Sucesso - Consultar grupo por id.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response retornando com sucesso e no formato esperado \", function () {\r",
+									"    // Validação do Reponse code = 200 , que o retorno é um Json , que nao há mensagens de erro e existe um body. \r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Performance da API conforme esperado\", function () {\r",
+									"     pm.expect(pm.response.responseTime).to.be.below(parseInt((pm.environment.get(\"time_out\"))));\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"const  schema ={\r",
+									"    \"type\":\"object\",\r",
+									"    \"properties\":{\r",
+									"         \"id\":                       { \"type\": [\"string\",\"null\"]},\r",
+									"         \"nome\":                     { \"type\": [\"string\",\"null\"]},\r",
+									"         \"dcos\":{\r",
+									"             \"type\": \"array\",\r",
+									"            \"items\":{\r",
+									"             \"properties\": {\r",
+									"               \"valor\":                     { \"type\": [\"string\",\"null\"]},\r",
+									"                         }\r",
+									"                     }\r",
+									"                 },\r",
+									"                  \"atributos\":{\r",
+									"                  \"type\": \"array\",\r",
+									"                  \"items\":{\r",
+									"                  \"properties\": {\r",
+									"                  \"valor\":                     { \"type\": [\"string\",\"null\"]}\r",
+									"                  }\r",
+									"            }\r",
+									"       }   \r",
+									"    } \r",
+									"};\r",
+									"\r",
+									"pm.test(\"Validar Schema dos campos de acordo com documentação\",()=> {\r",
+									"    pm.response.to.have.jsonSchema(schema)\r",
+									"})\r",
+									"pm.collectionVariables.get(\"variable_key\");\r",
+									"\r",
+									"//Excluir massa criada \r",
+									"pm.sendRequest({\r",
+									"    url: pm.environment.get(\"Ambiente\") + pm.collectionVariables.get(\"baseUrl\") + \"/grupos/\" + (pm.collectionVariables.get(\"responseDelete\")),\r",
+									"    method: \"DELETE\",\r",
+									"    header: {\r",
+									"        \"content-type\": \"application/json\",\r",
+									"        \"accept\": \"application/json\"\r",
+									"    },\r",
+									"    body: {}\r",
+									"}, function (err, res) {\r",
+									"     pm.test(\"Massa deletada com sucesso\",function(){\r",
+									"     pm.expect(res.status).to.be.equal(\"OK\");\r",
+									"     })\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"//Cria a massa de testes para a consulta \r",
+									"pm.sendRequest({\r",
+									"    url: pm.environment.get(\"Ambiente\") + pm.collectionVariables.get(\"baseUrl\") + \"/grupos/\" ,\r",
+									"    method: \"POST\",\r",
+									"    header: {\r",
+									"        \"content-type\": \"application/json\",\r",
+									"        \"accept\": \"application/json\"\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"        \"nome\": \"Massa de teste\",\r",
+									"        \"dcos\": [\r",
+									"    {\r",
+									"      \"valor\": \"300\"\r",
+									"    },\r",
+									"    {\r",
+									"      \"valor\": \"400\"\r",
+									"    },\r",
+									"    {\r",
+									"      \"valor\": \"500\"\r",
+									"    }\r",
+									"  ],\r",
+									"  \"atributos\": [\r",
+									"    {\r",
+									"      \"valor\": \"COR\"\r",
+									"    },\r",
+									"    {\r",
+									"      \"valor\": \"TESTE\"\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"        )}\r",
+									"}, function (err, res) {\r",
+									"     pm.test(\"Massa deletada com sucesso\",function(){\r",
+									"     \r",
+									"     \r",
+									"     let responseDelete = res.json(); \r",
+									"     console.log(responseDelete.id);\r",
+									"     pm.collectionVariables.set(\"responseDelete\", responseDelete.id);\r",
+									"\r",
+									"\r",
+									"     })\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Ambiente}}{{baseUrl}}/grupos/{{responseDelete}}",
+							"host": [
+								"{{Ambiente}}{{baseUrl}}"
+							],
+							"path": [
+								"grupos",
+								"{{responseDelete}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Erro- 404 Consultar grupo por id, não encontrado.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response retornando com sucesso e no formato esperado \", function () {\r",
+									"    // Validação do Reponse code = 200 , que o retorno é um Json , que nao há mensagens de erro e existe um body. \r",
+									"    pm.response.to.have.status(404);\r",
+									"    pm.response.to.be.not.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Performance da API conforme esperado\", function () {\r",
+									"     pm.expect(pm.response.responseTime).to.be.below(parseInt((pm.environment.get(\"time_out\"))));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Ambiente}}{{baseUrl}}/grupos/609bd0c0bb5c7d54b239ff8a",
+							"host": [
+								"{{Ambiente}}{{baseUrl}}"
+							],
+							"path": [
+								"grupos",
+								"609bd0c0bb5c7d54b239ff8a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sucesso - Editar um grupo.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response retornando com sucesso e no formato esperado \", function () {\r",
+									"    // Validação do Reponse code = 200 , que o retorno é um Json , que nao há mensagens de erro e existe um body. \r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.response.to.have.jsonBody();\r",
+									"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Performance da API conforme esperado\", function () {\r",
+									"     pm.expect(pm.response.responseTime).to.be.below(parseInt((pm.environment.get(\"time_out\"))));\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"const  schema ={\r",
+									"    \"type\":\"object\",\r",
+									"    \"properties\":{\r",
+									"         \"id\":                       { \"type\": [\"string\",\"null\"]},\r",
+									"         \"nome\":                     { \"type\": [\"string\",\"null\"]},\r",
+									"         \"dcos\":{\r",
+									"             \"type\": \"array\",\r",
+									"            \"items\":{\r",
+									"             \"properties\": {\r",
+									"               \"valor\":                     { \"type\": [\"string\",\"null\"]},\r",
+									"                         }\r",
+									"                     }\r",
+									"                 },\r",
+									"                  \"atributos\":{\r",
+									"                  \"type\": \"array\",\r",
+									"                  \"items\":{\r",
+									"                  \"properties\": {\r",
+									"                  \"valor\":                     { \"type\": [\"string\",\"null\"]}\r",
+									"                  }\r",
+									"            }\r",
+									"       }   \r",
+									"    } \r",
+									"};\r",
+									"\r",
+									"pm.test(\"Validar Schema dos campos de acordo com documentação\",()=> {\r",
+									"    pm.response.to.have.jsonSchema(schema)\r",
+									"})\r",
+									"pm.collectionVariables.get(\"variable_key\");\r",
+									"\r",
+									"//Excluir massa criada \r",
+									"pm.sendRequest({\r",
+									"    url: pm.environment.get(\"Ambiente\") + pm.collectionVariables.get(\"baseUrl\") + \"/grupos/\" + (pm.collectionVariables.get(\"responseDelete\")),\r",
+									"    method: \"DELETE\",\r",
+									"    header: {\r",
+									"        \"content-type\": \"application/json\",\r",
+									"        \"accept\": \"application/json\"\r",
+									"    },\r",
+									"    body: {}\r",
+									"}, function (err, res) {\r",
+									"     pm.test(\"Massa deletada com sucesso\",function(){\r",
+									"     pm.expect(res.status).to.be.equal(\"OK\");\r",
+									"     })\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"//Cria a massa de testes  \r",
+									"pm.sendRequest({\r",
+									"    url: pm.environment.get(\"Ambiente\") + pm.collectionVariables.get(\"baseUrl\") + \"/grupos/\" ,\r",
+									"    method: \"POST\",\r",
+									"    header: {\r",
+									"        \"content-type\": \"application/json\",\r",
+									"        \"accept\": \"application/json\"\r",
+									"    },\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"        \"nome\": \"Massa de teste\",\r",
+									"        \"dcos\": [\r",
+									"    {\r",
+									"      \"valor\": \"300\"\r",
+									"    },\r",
+									"    {\r",
+									"      \"valor\": \"400\"\r",
+									"    },\r",
+									"    {\r",
+									"      \"valor\": \"500\"\r",
+									"    }\r",
+									"  ],\r",
+									"  \"atributos\": [\r",
+									"    {\r",
+									"      \"valor\": \"COR\"\r",
+									"    },\r",
+									"    {\r",
+									"      \"valor\": \"TESTE\"\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"        )}\r",
+									"}, function (err, res) {\r",
+									"     pm.test(\"Massa deletada com sucesso\",function(){\r",
+									"     \r",
+									"     \r",
+									"     let responseDelete = res.json(); \r",
+									"     console.log(responseDelete.id);\r",
+									"     pm.collectionVariables.set(\"responseDelete\", responseDelete.id);\r",
+									"\r",
+									"\r",
+									"     })\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"TESTE EDITADO\",\r\n  \"dcos\": [\r\n    {\r\n      \"valor\": \"100\"\r\n    }\r\n  ],\r\n  \"atributos\": [\r\n    {\r\n      \"valor\": \"COR_I\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Ambiente}}{{baseUrl}}/grupos/{{responseDelete}}",
+							"host": [
+								"{{Ambiente}}{{baseUrl}}"
+							],
+							"path": [
+								"grupos",
+								"{{responseDelete}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Erro - 404 Editar um grupo, não encontrado.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response retornando com sucesso e no formato esperado \", function () {\r",
+									"    // Validação do Reponse code = 200 , que o retorno é um Json , que nao há mensagens de erro e existe um body. \r",
+									"    pm.response.to.have.status(404);\r",
+									"    pm.response.to.be.not.withBody;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Performance da API conforme esperado\", function () {\r",
+									"     pm.expect(pm.response.responseTime).to.be.below(parseInt((pm.environment.get(\"time_out\"))));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"TESTE EDITADO\",\r\n  \"dcos\": [\r\n    {\r\n      \"valor\": \"100\"\r\n    }\r\n  ],\r\n  \"atributos\": [\r\n    {\r\n      \"valor\": \"COR_I\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Ambiente}}{{baseUrl}}/grupos/609bd0c0bb5c7d54b239ff8a",
+							"host": [
+								"{{Ambiente}}{{baseUrl}}"
+							],
+							"path": [
+								"grupos",
+								"609bd0c0bb5c7d54b239ff8a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sucesso - Deletar um grupo.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Ambiente}}{{baseUrl}}/grupos/60a2ce01d0f8526bb3672ae2",
+							"host": [
+								"{{Ambiente}}{{baseUrl}}"
+							],
+							"path": [
+								"grupos",
+								"60a2ce01d0f8526bb3672ae2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Erro - 404  Deletar um grupo nao encontrado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Ambiente}}{{baseUrl}}/grupos/60a2ce01d0f8526bb3672ae2",
+							"host": [
+								"{{Ambiente}}{{baseUrl}}"
+							],
+							"path": [
+								"grupos",
+								"60a2ce01d0f8526bb3672ae2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/api/compras/grupo-definicao-atributo"
+		},
+		{
+			"key": "responsePost",
+			"value": ""
+		},
+		{
+			"key": "responseDelete",
+			"value": ""
+		},
+		{
+			"value": "",
+			"disabled": true
+		},
+		{
+			"key": "responseDelete.id",
+			"value": "",
+			"disabled": true
+		}
+	]
+}
